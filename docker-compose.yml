@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  dii_theatermanagement_bff:
+    image: ${DOCKER_REGISTRY-}diitheatermanagementbff
+    build:
+      context: .
+      dockerfile: src/Dii_TheaterManagement_Bff/Dockerfile
+  dii_theatermanagement_bff-dapr:
+     image: "daprio/daprd:latest"
+     command: [ "./daprd", "-app-id", "diitheatermanagementbff", "-app-port", "80" ]
+     depends_on:
+        - dii_theatermanagement_bff
+     network_mode: "service:dii_theatermanagement_bff" 
+
+  dii_orderingsvc.fake:
+    image: ${DOCKER_REGISTRY-}diiorderingsvcfake
+    build:
+      context: .
+      dockerfile: fake/Dii_OrderingSvc.Fake/Dockerfile
+  dii_orderingsvc-dapr:
+     image: "daprio/daprd:latest"
+     command: [ "./daprd", "-app-id", "diiorderingsvc", "-app-port", "80" ]
+     depends_on:
+        - dii_orderingsvc.fake
+     network_mode: "service:dii_orderingsvc.fake" 
+   
+  dii_moviecatalogsvc.fake:
+    image: ${DOCKER_REGISTRY-}diimoviecatalogsvcfake
+    build:
+      context: .
+      dockerfile: fake/Dii_MovieCatalogSvc.Fake/Dockerfile
+  dii_moviecatalogsvc-dapr:
+     image: "daprio/daprd:latest"
+     command: [ "./daprd", "-app-id", "diimoviecatalogsvc", "-app-port", "80" ]
+     depends_on:
+        - dii_moviecatalogsvc.fake
+     network_mode: "service:dii_moviecatalogsvc.fake" 
+

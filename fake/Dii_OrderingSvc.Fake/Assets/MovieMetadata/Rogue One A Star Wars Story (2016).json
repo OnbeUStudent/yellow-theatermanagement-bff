@@ -1,0 +1,40 @@
+{
+  "Title": "Rogue One: A Star Wars Story [Fake]",
+  "Year": "2016",
+  "Rated": "PG-13",
+  "Released": "16 Dec 2016",
+  "Runtime": "133 min",
+  "Genre": "Action, Adventure, Sci-Fi",
+  "Director": "Gareth Edwards",
+  "Writer": "Chris Weitz (screenplay by), Tony Gilroy (screenplay by), John Knoll (story by), Gary Whitta (story by), George Lucas (based on characters created by)",
+  "Actors": "Felicity Jones, Diego Luna, Alan Tudyk, Donnie Yen",
+  "Plot": "The daughter of an Imperial scientist joins the Rebel Alliance in a risky move to steal the plans for the Death Star.",
+  "Language": "English",
+  "Country": "USA",
+  "Awards": "Nominated for 2 Oscars. Another 24 wins & 81 nominations.",
+  "Poster": "https://m.media-amazon.com/images/M/MV5BMjEwMzMxODIzOV5BMl5BanBnXkFtZTgwNzg3OTAzMDI@._V1_SX300.jpg",
+  "Ratings": [
+    {
+      "Source": "Internet Movie Database",
+      "Value": "7.8/10"
+    },
+    {
+      "Source": "Rotten Tomatoes",
+      "Value": "84%"
+    },
+    {
+      "Source": "Metacritic",
+      "Value": "65/100"
+    }
+  ],
+  "Metascore": "65",
+  "imdbRating": "7.8",
+  "imdbVotes": "553,394",
+  "imdbID": "tt3748528",
+  "Type": "movie",
+  "DVD": "N/A",
+  "BoxOffice": "$532,177,324",
+  "Production": "Lucasfilm Ltd.",
+  "Website": "N/A",
+  "Response": "True"
+}

@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  dii_theatermanagement_bff:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
+  dii_orderingsvc.fake:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
+
+  dii_moviecatalogsvc.fake:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
