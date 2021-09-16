@@ -1,0 +1,59 @@
+name: deployment
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+env:
+  APP_NAME: Dii_TheaterManagement_Bff
+jobs:
+  build:
+    name: Deployment Pipeline
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v2
+      
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: 'Run Dotnet Tests'
+      uses: OnbeUStudent/devopssetup/actions/csharptest@master
+      with: 
+        PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+        PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+        PACT_PACTICIPANT: 'yellow-theatermanagement-bff'
+    
+    - name: 'Build and Deploy Apps'
+      id: publishapp
+      uses: OnbeUStudent/devopssetup/actions/csharpdeploy@master
+      with: 
+        APP_NAME: ${{ env.APP_NAME}}
+        REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+        REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+        STAGE_SITE_AKS_NAME: ${{ secrets.STAGE_SITE_AKS_NAME }}
+        STAGE_SITE_AKS_RESOURCE_GROUP: ${{ secrets.STAGE_SITE_AKS_RESOURCE_GROUP }}
+        PROD_SITE_AKS_NAME: ${{ secrets.STAGE_SITE_AKS_NAME }}
+        PROD_SITE_AKS_RESOURCE_GROUP: ${{ secrets.STAGE_SITE_AKS_RESOURCE_GROUP }}
+        HOST_NAME: ${{ secrets.HOST_URL }}
+    
+    - uses: actions/github-script@v4
+      name: 'Create github pr comment and deployment'
+      if: github.event_name == 'pull_request' && github.event.action != 'closed'
+      with:
+        script: | 
+          await github.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: "Review PR here - https://${{ steps.publishapp.outputs.DEPLOYED_APP_URL }}"
+                })
