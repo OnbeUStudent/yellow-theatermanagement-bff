@@ -67,7 +67,14 @@ namespace Dii_OrderingSvc.Fake.Features.SeedData
                     context.Add(detailedTheater);
                 }
             }
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string str = ex.ToString();
+            }
 
             foreach (string json in GetJsonAssets("Assets.MovieMetadata"))
             {
@@ -84,7 +91,14 @@ namespace Dii_OrderingSvc.Fake.Features.SeedData
                 }
             }
 
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string str = ex.ToString();
+            }
 
             List<Booking> bookings = new List<Booking>();
             var movies = context.Movies.OrderBy(m => m.MovieMetadata.Year).ToList(); // Movies in order by year
@@ -115,7 +129,14 @@ namespace Dii_OrderingSvc.Fake.Features.SeedData
                     context.Add(mchenryBooking);
                 }
             }
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                string str = ex.ToString();
+            }
         }
     }
 }

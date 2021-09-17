@@ -1,4 +1,5 @@
 ﻿using Dii_TheaterManagement_Bff.Clients;
+using PactNet.Matchers;
 using PactNet.Mocks.MockHttpService;
 using PactNet.Mocks.MockHttpService.Models;
 using System;
@@ -25,33 +26,28 @@ namespace Dii_TheaterManagement_Bff.PactConsumer.Tests.DiiOrderingSvc
 
         }
 
-        [Fact(Skip ="TBD")]
+        [Fact]
         public async Task ClientForOrderingSvc_Movies_GivenSomeMovies()
         {
             // Arrange
             _mockProviderService
               .Given("There are SOME movies")
-              .UponReceiving("A GET request to retrieve the movies")
+              .UponReceiving("A GET request to retrieve the list of movies")
               .With(new ProviderServiceRequest
               {
-                  Method = HttpVerb.Post,
-                  Path = "/api/Movies",
-                  Headers = new Dictionary<string, object>
-                    {
-                       { "Accept", "application/json" },
-                       { "Content-Type", "application/json; charset=utf-8" }
-                    }
+                  Method = HttpVerb.Get,
+                  Path = "/api/movies"
+
 
               })
               .WillRespondWith(new ProviderServiceResponse
               {
                   Status = 200,
                   Headers = new Dictionary<string, object>
-                    {
-                        { "Content-Type", "application/json; charset=utf-8" }
-                    }
-
-
+                  {
+                      { "Content-Type", "application/json; charset=utf-8" }
+                  },
+                  Body = Match.MinType(new { MovieId = 1, Title = "Example Movie" }, 1)
               });
             var httpClient = new HttpClient { BaseAddress = new Uri(_mockProviderServiceBaseUri) };
             httpClient.DefaultRequestHeaders
