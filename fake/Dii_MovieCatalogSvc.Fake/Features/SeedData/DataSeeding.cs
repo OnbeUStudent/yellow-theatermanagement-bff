@@ -1,5 +1,5 @@
 ﻿using Dii_MovieCatalogSvc.Fake.Data;
-using System;
+using System; 
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -42,7 +42,6 @@ namespace Dii_MovieCatalogSvc.Fake.Features.SeedData
                     byte[] guidData = new byte[16];
                     Array.Copy(BitConverter.GetBytes(longMovieId), guidData, 8);
                     var guidMovieId = new Guid(guidData);
-
                     var movie = new Movie
                     {
                         MovieId = guidMovieId,
