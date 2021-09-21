@@ -70,7 +70,7 @@ namespace Dii_TheaterManagement_Bff.PactProvider.Tests
             }
         }
 
-        [Fact(Skip = "To do Later")]
+        [Fact]
         public void HonorPactWithSpa()
         {
             string consumerId = "yellow-theatermanagement-spa";
