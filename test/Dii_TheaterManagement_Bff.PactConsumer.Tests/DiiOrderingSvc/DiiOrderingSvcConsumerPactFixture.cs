@@ -25,8 +25,8 @@ namespace Dii_TheaterManagement_Bff.PactConsumer.Tests.DiiOrderingSvc
             var pactConfig = new PactConfig
             {
                 SpecificationVersion = "2.0.0",
-                PactDir = @".\..\..\..\..\..\..\pacts\contracts",
-                LogDir = @".\..\..\..\..\..\..\pacts\logs"
+                PactDir = @".\..\..\..\..\..\pacts\contracts",
+                LogDir = @".\..\..\..\..\..\pacts\logs"
             };
 
             //PactBuilder = new PactBuilder(new PactConfig { SpecificationVersion = "2.0.0" }); //Configures the Specification Version

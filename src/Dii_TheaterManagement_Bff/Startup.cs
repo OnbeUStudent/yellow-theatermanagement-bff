@@ -1,23 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Dapr.Client;
 using Dii_TheaterManagement_Bff.Clients;
+using Dii_TheaterManagement_Bff.Clients.MovieCatalogSvc;
 using Dii_TheaterManagement_Bff.Features.FakeUsers;
 using Dii_TheaterManagement_Bff.Features.SyntheticBehavior;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Dii_TheaterManagement_Bff
 {

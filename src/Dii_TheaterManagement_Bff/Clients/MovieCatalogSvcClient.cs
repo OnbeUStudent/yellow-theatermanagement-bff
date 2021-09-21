@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Net.Http;
 
-namespace Dii_TheaterManagement_Bff.Clients
+namespace Dii_TheaterManagement_Bff.Clients.MovieCatalogSvc
 {
     public class MovieCatalogSvcClient
     {
