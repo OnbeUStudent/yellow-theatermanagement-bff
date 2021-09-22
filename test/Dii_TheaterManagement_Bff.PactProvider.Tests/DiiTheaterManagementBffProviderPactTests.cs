@@ -22,7 +22,7 @@ namespace Dii_TheaterManagement_Bff.PactProvider.Tests
         private readonly CustomWebApplicationFactory<Startup> _factory;
         private readonly WebApplicationFactory<Dii_OrderingSvc.Fake.Startup> _orderServiceFakeFactory;
         private readonly PactVerifierConfig pactVerifierConfig;
-        private const string providerId = "white-theatermanagement-bff";
+        private const string providerId = "yellow-theatermanagement-bff";
         public DiiTheaterManagementBffProviderPactTests(ITestOutputHelper testOutputHelper,
             CustomWebApplicationFactory<Startup> factory
             , WebApplicationFactory<Dii_OrderingSvc.Fake.Startup> orderServiceFakeFactory)
@@ -46,7 +46,7 @@ namespace Dii_TheaterManagement_Bff.PactProvider.Tests
         {
 
             // Arrange
-            string consumerId = "white-theatermanagement-web";
+            string consumerId = "yellow-theatermanagement-web";
 
             //Act / Assert
             var httpClientForInMemoryInstanceOfApp = _factory.CreateClient();
@@ -73,7 +73,7 @@ namespace Dii_TheaterManagement_Bff.PactProvider.Tests
         [Fact]
         public void HonorPactWithSpa()
         {
-            string consumerId = "white-theatermanagement-spa";
+            string consumerId = "yellow-theatermanagement-spa";
 
 
             var httpClientForInMemoryInstanceOfApp = _factory.CreateClient();

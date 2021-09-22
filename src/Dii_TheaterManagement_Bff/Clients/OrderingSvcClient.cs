@@ -429,7 +429,7 @@ namespace Dii_TheaterManagement_Bff.Clients
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<Movie> ApiMoviesGetAsync(long id)
+        public System.Threading.Tasks.Task<Movie> ApiMoviesGetAsync(Guid id)
         {
             return ApiMoviesGetAsync(id, System.Threading.CancellationToken.None);
         }
@@ -437,7 +437,7 @@ namespace Dii_TheaterManagement_Bff.Clients
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<Movie> ApiMoviesGetAsync(long id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<Movie> ApiMoviesGetAsync(Guid id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1210,7 +1210,7 @@ namespace Dii_TheaterManagement_Bff.Clients
     public partial class Movie
     {
         [Newtonsoft.Json.JsonProperty("movieId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long MovieId { get; set; }
+        public Guid MovieId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("bookings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<Booking> Bookings { get; set; }
@@ -1229,7 +1229,7 @@ namespace Dii_TheaterManagement_Bff.Clients
     public partial class Booking
     {
         [Newtonsoft.Json.JsonProperty("movieId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long MovieId { get; set; }
+        public Guid MovieId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("movie", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Movie Movie { get; set; }
