@@ -1,30 +1,35 @@
-﻿Feature: View Bookings
-- FIX THIS
+﻿@ignore
+Feature: View Bookings
   As a user
   I want to view the CurrentBookings
-  So that I know what's playing
+  So that I can tell my consumers what tickets they can purchase
 
-   Background: CurrentBookings list
+Background:
+    Given the following movies
+    | Title                                          |
+    | Solo: A Star Wars Story                        |
+    | Rogue One: A Star Wars Story                   |
+    | Star Wars: Episode I - The Phantom Menace      |
+    | Star Wars: Episode II - Attack of the Clones   |
+    | Star Wars: Episode III - Revenge of the Sith   |
+    | Star Wars: Episode IV - A New Hope             |
+    | Star Wars: Episode IX - The Rise of Skywalker  |
+    | Star Wars: Episode V - The Empire Strikes Back |
+    | The Star Wars Holiday Special                  |
+    | Star Wars: Episode VI - Return of the Jedi     |
+    | Star Wars: Episode VII - The Force Awakens     |
+    | Star Wars: Episode VIII - The Last Jedi        |
+    | The Star Wars Holiday Special                  |
+
     Given list of CurrentBookingsView                          
-    | date    | tittle                                                |
-    | 202110  | The Star Wars Holiday Special [Fake]                  |
-    | 202112  | Star Wars: Episode VI - Return of the Jedi [Fake]     |
-    | 202111  | Star Wars: Episode V - The Empire Strikes Back [Fake] |
-    | 202109  | Star Wars: Episode IV - A New Hope [Fake]             |
-
+    | date    | title                                          |
+    | 202110  | The Star Wars Holiday Special                  |
+    | 202112  | Star Wars: Episode VI - Return of the Jedi     |
+    | 202111  | Star Wars: Episode V - The Empire Strikes Back |
+    | 202109  | Star Wars: Episode IV - A New Hope             |
     
 
   @Ready @AcceptanceTest @ComponentTest
   Scenario: View Bookings - admin
-    When I view bookings as an admin user on the admin page
+    When I view bookings as an user
     Then I am able to see all CurrentBookings
-
-# @Ready @AcceptanceTest @ComponentTest
-#  Scenario: View Bookings - non-admin
-#    When I view bookings as an nonadmin user on the customer page
-#    Then I am able to see all CurrentBookings
-#
-#  @Ready @ComponentTest @AcceptanceTest
-#  Scenario: View Bookings after the next 3 months
-#    When I view bookings as an nonadmin user on the customer page
-#    Then I cannot see ViewBooking link
