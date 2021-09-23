@@ -1,5 +1,4 @@
-﻿@ignore
-Feature: View Bookings
+﻿Feature: View Bookings
   As a user
   I want to view the CurrentBookings
   So that I can tell my consumers what tickets they can purchase

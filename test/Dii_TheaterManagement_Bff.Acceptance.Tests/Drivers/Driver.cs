@@ -31,6 +31,11 @@ namespace Dii_TheaterManagement_Bff.Acceptance.Tests.Drivers
 
         }
 
+        internal void AddBookingsToDatabase(Table table)
+        {
+            // Note that we assume the specified movies are already in the seed data.
+        }
+
         internal void AddMoviesToDatabase(Table table)
         {
             // Note that we assume the specified movies are already in the seed data.
