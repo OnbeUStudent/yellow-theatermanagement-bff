@@ -28,14 +28,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: 'Run Dotnet Tests'
-      uses: OnbeUStudent/devopssetup/actions/csharptest@master
-      with: 
-        PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
-        PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
-        PACT_PACTICIPANT: '${{ env.PACT_PACTICIPANT }}'
-        VERIFY_PROVIDER_PACT: ${{ env.VERIFY_PROVIDER_PACT}}
-    
+      
     - name: 'Build and Deploy Apps'
       id: publishapp
       uses: OnbeUStudent/devopssetup/actions/csharpdeploy@master
