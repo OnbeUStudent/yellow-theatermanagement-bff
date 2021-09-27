@@ -4,6 +4,7 @@ using Dii_MovieCatalogSvc.Fake.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 //test
 namespace Dii_MovieCatalogSvc.Fake.Controllers
 {
@@ -29,11 +30,15 @@ namespace Dii_MovieCatalogSvc.Fake.Controllers
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Movie>> GetMovie(long id)
+        public async Task<ActionResult<Movie>> GetMovie(string id)
         {
+            if (!Guid.TryParse(id, out Guid movieIdAsGuid))
+            {
+                return NotFound();
+            }
             var movie = await _context.Movie
                 .Include(movie => movie.MovieMetadata)
-                .SingleOrDefaultAsync(movie => movie.MovieId == id);
+                .SingleOrDefaultAsync(movie => movie.MovieId == movieIdAsGuid);
             if (movie == null)
             {
                 return NotFound();
@@ -46,9 +51,13 @@ namespace Dii_MovieCatalogSvc.Fake.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
-        public async Task<IActionResult> PutMovie(long id, Movie movie)
+        public async Task<IActionResult> PutMovie(string id, Movie movie)
         {
-            if (id != movie.MovieId)
+            if (!Guid.TryParse(id, out Guid movieIdAsGuid))
+            {
+                return NotFound();
+            }
+            if (movieIdAsGuid != movie.MovieId)
             {
                 return BadRequest();
             }
@@ -61,7 +70,7 @@ namespace Dii_MovieCatalogSvc.Fake.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MovieExists(id))
+                if (!MovieExists(movieIdAsGuid))
                 {
                     return NotFound();
                 }
@@ -88,7 +97,7 @@ namespace Dii_MovieCatalogSvc.Fake.Controllers
         // DELETE: api/Movies/5
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
-        public async Task<IActionResult> DeleteMovie(long id)
+        public async Task<IActionResult> DeleteMovie(string id)
         {
             var movie = await _context.Movie.FindAsync(id);
             if (movie == null)
@@ -105,9 +114,13 @@ namespace Dii_MovieCatalogSvc.Fake.Controllers
         // PUT: api/MovieMetadatas/5/MovieMetadatas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}/MovieMetadatas")]
-        public async Task<IActionResult> PutMovieMetadata(long id, MovieMetadata movieMetadata)
+        public async Task<IActionResult> PutMovieMetadata(string id, MovieMetadata movieMetadata)
         {
-            if (id != movieMetadata.MovieMetadataId)
+            if (!Guid.TryParse(id, out Guid movieIdAsGuid))
+            {
+                return NotFound();
+            }
+            if (movieIdAsGuid != movieMetadata.MovieMetadataId)
             {
                 return BadRequest();
             }
@@ -120,7 +133,7 @@ namespace Dii_MovieCatalogSvc.Fake.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MovieExists(id))
+                if (!MovieExists(movieIdAsGuid))
                 {
                     return NotFound();
                 }
@@ -133,7 +146,7 @@ namespace Dii_MovieCatalogSvc.Fake.Controllers
             return NoContent();
         }
 
-        private bool MovieExists(long id)
+        private bool MovieExists(Guid id)
         {
             return _context.Movie.Any(e => e.MovieId == id);
         }

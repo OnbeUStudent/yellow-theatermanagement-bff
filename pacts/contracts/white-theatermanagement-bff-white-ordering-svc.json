@@ -1,0 +1,43 @@
+{
+  "consumer": {
+    "name": "white-theatermanagement-bff"
+  },
+  "provider": {
+    "name": "white-ordering-svc"
+  },
+  "interactions": [
+    {
+      "description": "A GET request to retrieve the list of movies",
+      "providerState": "There are SOME movies",
+      "request": {
+        "method": "get",
+        "path": "/api/movies"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": [
+          {
+            "MovieId": "16b3a794-6729-4b06-9013-04b4047a371a",
+            "Title": "Example Movie"
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
