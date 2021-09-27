@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Run SpecFlow Tests
+        # You may pin to the exact commit or the version.
+        # uses: cryptic-wizard/run-specflow-tests@d045ff676eeff4a2d388c1c1fd906ea94762eb55
+        uses: cryptic-wizard/run-specflow-tests@v1.2.0
+        with:
+          # Relative path of <MySpecflowProject.dll> (example: MySpecflowProject/bin/Debug/netcoreapp3.1/MySpecflowProject.dll)
+          test-assembly-dll: test/Dii_TheaterManagement_Bff.Acceptance.Tests/bin/Debug/net5.0/Dii_TheaterManagement_Bff.Acceptance.Tests.dll
+          # Relative path of <MySpecflowProjectTestExecution(s).json> (example: MySpecflowProject/bin/Debug/netcoreapp3.1/TestExecution.json)
+          test-execution-json: test/Dii_TheaterManagement_Bff.Acceptance.Tests/bin/Debug/net5.0/TestExecution.json
+          # Framework version of dotnet (example: netcoreapp3.1, net5.0)
+          framework: net5.0
+          # Build configuration (example: Debug)
+          configuration: Release
+          # Verbosity of the Dotnet App Build (default = minimal)
+          build-verbosity: minimal
+          # Verbosity of the SpecFlow Test Execution (default = normal)
+          test-verbosity: normal
+          # Set to true to disable dotnet build and dotnet restore
+          no-build: false
