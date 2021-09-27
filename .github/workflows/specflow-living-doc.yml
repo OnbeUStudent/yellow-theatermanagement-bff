@@ -16,15 +16,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.0
       - name: BuildDotnetApp
-        run: dotnet build -c Debug
+        run: dotnet build -c Debug -f net5.0
         shell: bash
       - name: RunSpecFlowTests
-        run: dotnet test --no-build -c Debug
+        run: dotnet test --no-build -c Debug -f net5.0
         shell: bash
       - name: Run SpecFlow Tests
         # You may pin to the exact commit or the version.
