@@ -41,3 +41,8 @@ jobs:
           test-verbosity: normal
           # Set to true to disable dotnet build and dotnet restore
           no-build: true
+      - name: 'Publish Specflow Test Results'
+        uses: actions/upload-artifact@v2
+        with:
+          name: 'Specflow Test Results'
+          path: LivingDoc.html
