@@ -15,7 +15,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
+      
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: net5.0
+      - name: BuildDotnetApp
+        run: dotnet build -c Debug
+        shell: bash
+      - name: RunSpecFlowTests
+        run: dotnet test --no-build -c Debug
+        shell: bash
       - name: Run SpecFlow Tests
         # You may pin to the exact commit or the version.
         # uses: cryptic-wizard/run-specflow-tests@d045ff676eeff4a2d388c1c1fd906ea94762eb55
@@ -34,4 +44,4 @@ jobs:
           # Verbosity of the SpecFlow Test Execution (default = normal)
           test-verbosity: normal
           # Set to true to disable dotnet build and dotnet restore
-          no-build: false
+          no-build: true
