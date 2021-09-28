@@ -26,7 +26,7 @@ jobs:
       run: |
          dotnet test test/Dii_TheaterManagement_Bff.Acceptance.Tests/Dii_TheaterManagement_Bff.Acceptance.Tests.csproj --no-build --verbosity normal
       shell: bash
-    - name: GenerateSpecFlowLivingDoc
+    - name: Generate SpecFlow LivingDoc
       run: |
         echo "Generating Acceptance Tests LivingDoc"
         ACCEPTANCE_TEST_PATH=$(find . -type d -iname "*.Acceptance.Tests")
@@ -38,10 +38,10 @@ jobs:
         ACCEPTANCE_TEST_JSON=$(find $ACCEPTANCE_TEST_PATH -type f -iname "TestExecution.json" -ipath "*/bin/*" -not -ipath "*/ref/*")
         echo "Execution Json: " $ACCEPTANCE_TEST_JSON
         dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
-        livingdoc test-assembly $ACCEPTANCE_TEST_DLL -t $ACCEPTANCE_TEST_JSON -o livingdoc.html 
+        livingdoc test-assembly $ACCEPTANCE_TEST_DLL -t $ACCEPTANCE_TEST_JSON
       shell: bash
-    - name: 'Publish Specflow Test Results'
+    - name: 'Publish Specflow LivingDoc'
       uses: actions/upload-artifact@v2
       with:
-        name: 'Specflow Test Results'
+        name: 'Specflow LivingDoc'
         path: LivingDoc.html
