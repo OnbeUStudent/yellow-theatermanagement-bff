@@ -37,6 +37,7 @@ jobs:
         echo "Test Assembly: " $ACCEPTANCE_TEST_DLL
         ACCEPTANCE_TEST_JSON=$(find $ACCEPTANCE_TEST_PATH -type f -iname "TestExecution.json" -ipath "*/bin/*" -not -ipath "*/ref/*")
         echo "Execution Json: " $ACCEPTANCE_TEST_JSON
+        dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
         livingdoc test-assembly $ACCEPTANCE_TEST_DLL -t $ACCEPTANCE_TEST_JSON -o livingdoc.html 
       shell: bash
     - name: 'Publish Specflow Test Results'
