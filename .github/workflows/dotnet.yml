@@ -23,13 +23,13 @@ jobs:
     - name: Build
       run: dotnet build Dii_TheaterManagement_Bff.sln --no-restore
     - name: Test
-      run: dotnet test test\Dii_TheaterManagement_Bff.Acceptance.Tests\Dii_TheaterManagement_Bff.Acceptance.Tests.csproj --no-build --verbosity normal
+      run: dotnet test test/Dii_TheaterManagement_Bff.Acceptance.Tests/Dii_TheaterManagement_Bff.Acceptance.Tests.csproj --no-build --verbosity normal
     - name: GenerateSpecFlowLivingDoc
       run: |
         echo "$PWD \n"
         echo "$(ls $PWD) \n"
         dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
-        livingdoc feature-folder test\Dii_TheaterManagement_Bff.Acceptance.Tests
+        livingdoc feature-folder test/Dii_TheaterManagement_Bff.Acceptance.Tests
 
       shell: bash
     - name: 'Publish Specflow Test Results'
