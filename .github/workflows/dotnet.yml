@@ -29,7 +29,8 @@ jobs:
         echo "$PWD \n"
         tree test/Dii_TheaterManagement_Bff.Acceptance.Tests
         dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
-        livingdoc feature-folder test/Dii_TheaterManagement_Bff.Acceptance.Tests
+        #livingdoc feature-folder test/Dii_TheaterManagement_Bff.Acceptance.Tests
+        livingdoc test-assembly test/Dii_TheaterManagement_Bff.Acceptance.Tests/bin/Debug/net5.0/Dii_TheaterManagement_Bff.Acceptance.Tests.dll -t test/Dii_TheaterManagement_Bff.Acceptance.Tests/bin/Debug/net5.0/TestExecution.json
 
       shell: bash
     - name: 'Publish Specflow Test Results'
