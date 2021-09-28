@@ -27,7 +27,7 @@ jobs:
     - name: GenerateSpecFlowLivingDoc
       run: |
         echo "$PWD \n"
-        echo "$(ls $PWD) \n"
+        tree test/Dii_TheaterManagement_Bff.Acceptance.Tests
         dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
         livingdoc feature-folder test/Dii_TheaterManagement_Bff.Acceptance.Tests
 
