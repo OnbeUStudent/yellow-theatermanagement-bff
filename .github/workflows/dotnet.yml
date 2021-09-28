@@ -23,15 +23,27 @@ jobs:
     - name: Build
       run: dotnet build Dii_TheaterManagement_Bff.sln --no-restore
     - name: Test
-      run: dotnet test test/Dii_TheaterManagement_Bff.Acceptance.Tests/Dii_TheaterManagement_Bff.Acceptance.Tests.csproj --no-build --verbosity normal
+      run: |
+         echo "Running Unit Tests"
+         SOLUTION_PATH=$(find . -type f -iname "*.sln")
+         if [ -n "$SOLUTION_PATH" ]; then 
+         echo "Testing Solution - ${SOLUTION_PATH}"
+         dotnet test ${SOLUTION_PATH} --logger "console;verbosity=detailed" 
+         fi
+         #dotnet test test/Dii_TheaterManagement_Bff.Acceptance.Tests/Dii_TheaterManagement_Bff.Acceptance.Tests.csproj --no-build --verbosity normal
+      shell: bash
     - name: GenerateSpecFlowLivingDoc
       run: |
-        echo "$PWD \n"
-        tree test/Dii_TheaterManagement_Bff.Acceptance.Tests
-        dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
-        #livingdoc feature-folder test/Dii_TheaterManagement_Bff.Acceptance.Tests
-        livingdoc test-assembly test/Dii_TheaterManagement_Bff.Acceptance.Tests/bin/Debug/net5.0/Dii_TheaterManagement_Bff.Acceptance.Tests.dll -t test/Dii_TheaterManagement_Bff.Acceptance.Tests/bin/Debug/net5.0/TestExecution.json
-
+        echo "Generating Acceptance Tests LivingDoc"
+        ACCEPTANCE_TEST_PATH=$(find . -type d -iname "*.Acceptance.Tests")
+        echo "Full Path: " $ACCEPTANCE_TEST_PATH
+        ACCEPTANCE_TEST_FOLDER=$(basename $ACCEPTANCE_TEST_PATH)
+        echo "Folder Name: " $ACCEPTANCE_TEST_FOLDER
+        ACCEPTANCE_TEST_DLL=$(find $ACCEPTANCE_TEST_PATH -type f -iname "${ACCEPTANCE_TEST_FOLDER}.dll" -ipath "*/bin/*" -not -ipath "*/ref/*")
+        echo "Test Assembly: " $ACCEPTANCE_TEST_DLL
+        ACCEPTANCE_TEST_JSON=$(find $ACCEPTANCE_TEST_PATH -type f -iname "TestExecution.json" -ipath "*/bin/*" -not -ipath "*/ref/*")
+        echo "Execution Json: " $ACCEPTANCE_TEST_JSON
+        livingdoc test-assembly $ACCEPTANCE_TEST_DLL -t $ACCEPTANCE_TEST_JSON -o livingdoc.html 
       shell: bash
     - name: 'Publish Specflow Test Results'
       uses: actions/upload-artifact@v2
