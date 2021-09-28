@@ -19,8 +19,21 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Dii_TheaterManagement_Bff.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build Dii_TheaterManagement_Bff.sln --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test test\Dii_TheaterManagement_Bff.Acceptance.Tests\Dii_TheaterManagement_Bff.Acceptance.Tests.csproj --no-build --verbosity normal
+    - name: GenerateSpecFlowLivingDoc
+      run: |
+        echo "$PWD \n"
+        echo "$(ls $PWD) \n"
+        dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+        livingdoc feature-folder test\Dii_TheaterManagement_Bff.Acceptance.Tests
+
+      shell: bash
+    - name: 'Publish Specflow Test Results'
+      uses: actions/upload-artifact@v2
+      with:
+        name: 'Specflow Test Results'
+        path: LivingDoc.html
