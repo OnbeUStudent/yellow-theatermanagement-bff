@@ -24,13 +24,7 @@ jobs:
       run: dotnet build Dii_TheaterManagement_Bff.sln --no-restore
     - name: Test
       run: |
-         echo "Running Unit Tests"
-         SOLUTION_PATH=$(find . -type f -iname "*.sln")
-         if [ -n "$SOLUTION_PATH" ]; then 
-         echo "Testing Solution - ${SOLUTION_PATH}"
-         dotnet test ${SOLUTION_PATH} --logger "console;verbosity=detailed" 
-         fi
-         #dotnet test test/Dii_TheaterManagement_Bff.Acceptance.Tests/Dii_TheaterManagement_Bff.Acceptance.Tests.csproj --no-build --verbosity normal
+         dotnet test test/Dii_TheaterManagement_Bff.Acceptance.Tests/Dii_TheaterManagement_Bff.Acceptance.Tests.csproj --no-build --verbosity normal
       shell: bash
     - name: GenerateSpecFlowLivingDoc
       run: |
